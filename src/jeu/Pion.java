@@ -18,6 +18,15 @@ public class Pion {
 	public int getVie() {
 		return nbVie;
 	}
+	public void changerVie(int n) {
+		nbVie+=n;
+		if(nbVie>5) {
+			nbVie=5;
+		}
+		else if(nbVie<0) {
+			nbVie=0;
+		}
+	}
 	public Pirate getPirate() {
 		return pirate;
 	}

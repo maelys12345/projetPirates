@@ -21,5 +21,16 @@ public class Joueur {
 		}
 		pion.setCase(nouvelleCase);
 	}
+	public void lancerDes(PlateauJeu plateau) {
+		plateau.getDe(0).lancer();
+		plateau.setResultatDes(0,plateau.getDe(0).getResultat());
+		plateau.getDe(1).lancer();
+		plateau.setResultatDes(1,plateau.getDe(1).getResultat());
+	}
+	public void lancerUnDe(PlateauJeu plateau) {
+		plateau.getDe(0).lancer();
+		plateau.setResultatDes(0,plateau.getDe(0).getResultat());
+		plateau.setResultatDes(1,0);
+	}
 
 }

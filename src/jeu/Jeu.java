@@ -5,8 +5,10 @@ public class Jeu {
 	private Joueur[] joueurs=new Joueur[2];
 	private int nbJoueur=0;
 	private PlateauJeu plateau;
+	private IAffichage affichage;
 	
 	public Jeu() {
+		affichage=new Affichage();
 		pions[0]=new Pion(Pirate.CAPITAINE_CROCHET);
 		pions[1]=new Pion(Pirate.LUFFY);
 		pions[2]=new Pion(Pirate.JACK_SPARROW);
@@ -18,6 +20,15 @@ public class Jeu {
 			joueurs[nbJoueur]=new Joueur(nom,pion);
 			nbJoueur++;
 		}
+	}
+	public Joueur getJoueur(int indice) {
+		if(indice>0 && indice<joueurs.length) {
+			return joueurs[indice];
+		}
+		return null;
+	}
+	public int donnerCaseActuelle(Joueur joueur) {
+		return joueur.getPion().getCaseActuelle();
 	}
 
 }
