@@ -1,7 +1,7 @@
 package jeu;
 
 public class PlateauJeu {
-	public static int nbCases=30;
+	public int nbCases=31;
 	private CaseSpeciale[] caseSpeciales=new CaseSpeciale[nbCases];
 	private De[] des=new De[2];
 	private int[] resultatDes=new int[2];
@@ -14,6 +14,9 @@ public class PlateauJeu {
 	}
 	public void ajouterCaseSpeciale(CaseSpeciale caseSpeciale, int indice) {
 		caseSpeciales[indice]=caseSpeciale;
+	}
+	public CaseSpeciale[] getTabCaseSpe() {
+		return caseSpeciales;
 	}
 	public void setResultatDes(int indice,int resultat) {
 		if(indice<2) {
@@ -32,5 +35,6 @@ public class PlateauJeu {
 		}
 		return 0;
 	}
+	
 
 }

@@ -36,5 +36,8 @@ public class Pion {
 	public Joueur getJoueur() {
 		return joueur;
 	}
+	public boolean estATerre() {
+		return nbVie==0;
+	}
 
 }

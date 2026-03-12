@@ -3,7 +3,7 @@ import java.security.SecureRandom;
 import java.util.Random;
 
 public class De {
-	private static int nbFace = 6;
+	private int nbFace = 6;
 	private int resultat;
 	private Random random;
 	
