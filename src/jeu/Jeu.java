@@ -23,7 +23,6 @@ public class Jeu {
 		if(nbJoueur<joueurs.length) {
 			joueurs[nbJoueur]=new Joueur(nom,pion);
 			nbJoueur++;
-			System.out.println("Joueur créé bravo");
 		}
 	}
 	public Joueur getJoueur(int indice) {
@@ -60,23 +59,49 @@ public class Jeu {
 		String nom=entreeClavier.nextLine();
 		return nom;
 	}
-	public boolean joueurATerre() {
+	private boolean joueurATerre() {
 		return joueurs[0].getPion().estATerre() || joueurs[1].getPion().estATerre();
 	}
-	public boolean jeuFini() {
+	private boolean jeuFini() {
 		return joueurs[0].getPion().getCaseActuelle()==plateau.nbCases-1 || joueurs[1].getPion().getCaseActuelle()==plateau.nbCases-1;
 	}
+	private void trouverGagnant(boolean joueurKO) {
+		if(joueurKO) {
+			if(joueurs[0].getPion().estATerre()) {
+				affichage.afficherJoueurMort(joueurs[0]);
+				affichage.afficherFinJeu(joueurs[1]);
+			}
+			else {
+				affichage.afficherJoueurMort(joueurs[1]);
+				affichage.afficherFinJeu(joueurs[0]);
+			}
+		}
+		else{
+			if(donnerCaseActuelle(joueurs[0])==plateau.nbCases-1) {
+				affichage.afficherPirateArrive(joueurs[0]);
+				affichage.afficherFinJeu(joueurs[0]);
+			}
+			else {
+				affichage.afficherPirateArrive(joueurs[1]);
+				affichage.afficherFinJeu(joueurs[1]);
+			}
+		}
+	}
+	
 	public void deroulerJeu() {
 		for(int i=0;i<2;i++) {
 			String nom=choisirNom(i+1);
 			Pion pirate=choisirPion(pions);
 			entreeClavier.nextLine();
 			creerJoueur(nom,pirate);
+			affichage.afficherSeparation();
 		}
 		afficherContexte(joueurs[0],joueurs[1]);
+		affichage.afficherSeparation();
 		int indiceJoueurActuel=0;
 		do {
 			Joueur joueurActuel=joueurs[indiceJoueurActuel];
+			affichage.afficherTourJoueur(joueurActuel);
 			int caseActuelle=donnerCaseActuelle(joueurActuel);
 			joueurActuel.lancerDes(affichage,plateau);
 			joueurActuel.deplacerPion(affichage,plateau.getResultatDe(0)+plateau.getResultatDe(1),plateau);
@@ -85,8 +110,9 @@ public class Jeu {
 				plateau.getTabCaseSpe()[caseActuelle].appliquerEffet(affichage,joueurs[0],joueurs[1],plateau);
 				}
 			indiceJoueurActuel=(indiceJoueurActuel+1)%2;
+			affichage.afficherSeparation();
 			}while(!joueurATerre() && !jeuFini());
-		System.out.println("JEU FINI YIPPEE");
+		trouverGagnant(joueurATerre());
 	}
 
 }

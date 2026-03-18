@@ -3,13 +3,23 @@ package jeu;
 public class Affichage implements IAffichage {
 	
 	@Override
+	public void afficherSeparation() {
+		System.out.println("\n------------------------------\n");
+	}
+	
+	protected void donnerPirate(Joueur joueur) {
+		System.out.print("Le pirate "+joueur.getPion().getPirate().getNom());
+	}
+	
+	@Override
 	public void afficherMauvaisChoix() {
 		System.out.println("Choix invalide, recommencez.");
 	}
 
 	@Override
 	public void afficherContexte(Joueur j1,Joueur j2) {
-		System.out.println("Les pirates "+j1.getPion().getPirate()+" et "+j2.getPion().getPirate()+" se retrouvent au centre d'une ile déserte.");
+		System.out.println("Les pirates "+j1.getPion().getPirate().getNom()+" et "+j2.getPion().getPirate().getNom()
+				+" se retrouvent au centre d'une ile déserte.");
 		System.out.println("Leur but : être le premier à s'échapper de l'ile, ou bien survivre à son adversaire.");
 
 	}
@@ -30,9 +40,14 @@ public class Affichage implements IAffichage {
 	}
 	
 	@Override
+	public void afficherTourJoueur(Joueur joueur) {
+		System.out.println("Au tour du joueur "+joueur.getNom()+" de jouer!");
+		afficherViesRestantes(joueur);
+	}
+	
+	@Override
 	public void afficherLancerDes(Joueur joueur) {
-		System.out.println("Au tour du joueur "+joueur.getNom()+" de lancer ses dés!");
-		System.out.println("Appuiez sur une touche pour lancer les dés.");
+		System.out.println("Appuyez sur une touche pour lancer les dés.");
 	}
 	@Override
 	public void afficherLancerUnDe(Joueur joueur) {
@@ -70,31 +85,41 @@ public class Affichage implements IAffichage {
 	}
 	@Override
 	public void afficherAvancerJusqua30(Joueur joueur) {
-		System.out.println("Le pirate "+joueur.getPion().getPirate()+" avance jusqu'à la dernière case.");
+		donnerPirate(joueur);
+		System.out.println(" avance jusqu'à la dernière case.");
 	}
 	@Override
 	public void afficherReculerCase(Joueur joueur) {
-		System.out.println("Le pirate "+joueur.getPion().getPirate()+" recule jusqu'à atteindre la case "+joueur.getPion().getCaseActuelle()+".");
+		donnerPirate(joueur);
+		System.out.println(" recule jusqu'à atteindre la case "+joueur.getPion().getCaseActuelle()+".");
 	}
 	@Override
 	public void afficherAvancerCase(Joueur joueur) {
-		System.out.println("Le pirate "+joueur.getPion().getPirate()+" avance jusqu'à la case "+joueur.getPion().getCaseActuelle()+".");
+		donnerPirate(joueur);
+		System.out.println(" avance jusqu'à la case "+joueur.getPion().getCaseActuelle()+".");
 	}
 	@Override
 	public void afficherAllerCase(Joueur joueur) {
-		System.out.println("Le pirate "+joueur.getPion().getPirate()+"se déplace jusqu'à la case "+joueur.getPion().getCaseActuelle()+".");
+		donnerPirate(joueur);
+		System.out.println(" se déplace jusqu'à la case "+joueur.getPion().getCaseActuelle()+".");
 	}
 	@Override
 	public void afficherPerdreUneVie(Joueur joueur) {
-		System.out.println("Tonnerre! Le pirate "+joueur.getPion().getPirate()+" perd une vie!");
+		System.out.print("Tonnerre! ");
+		donnerPirate(joueur);
+		System.out.println(" perd une vie!");
+		afficherViesRestantes(joueur);
 	}
 	@Override
 	public void afficherGagnerUneVie(Joueur joueur) {
-		System.out.println("Les dieux soient loués! Le pirate "+joueur.getPion().getPirate()+" gagne une vie!");
+		System.out.print("Les dieux soient loués! ");
+		donnerPirate(joueur);
+		System.out.println(" gagne une vie!");
+		afficherViesRestantes(joueur);
 	}
 	@Override
 	public void afficherViesRestantes(Joueur joueur) {
-		System.out.print("Vies restantes du pirate"+joueur.getPion().getPirate()+" : ");
+		System.out.print("Vies restantes du pirate "+joueur.getPion().getPirate().getNom()+" : ");
 		for(int i=0;i<joueur.getPion().getVie();i++) {
 			System.out.print("❤️ ");
 		}
@@ -103,6 +128,32 @@ public class Affichage implements IAffichage {
 	@Override
 	public void afficherDuelEgalite() {
 		System.out.println("Wouah! Egalité! Les deux pirates s'en sortent indemnes!");
+	}
+	@Override
+	public void afficherBombeDeclenchee() {
+		System.out.println("Argh! Une bombe cachée dans la case se déclenche!");
+	}
+	@Override
+	public void afficherPiratesExplosent() {
+		System.out.println("Tous les pirates perdent une vie!");
+	}
+	
+	@Override
+	public void afficherJoueurMort(Joueur joueur) {
+		System.out.println("Mille millions de mille sabords!");
+		donnerPirate(joueur);
+		System.out.println(" n'a plus de vie et doit se rendre...");
+	}
+	@Override
+	public void afficherPirateArrive(Joueur joueur) {
+		System.out.println("Hourra!");
+		donnerPirate(joueur);
+		System.out.println(" a atteint le bout de l'ile, il peut maintenant rejoindre son bateau pour voguer vers de nouvelles aventures!");
+	}
+	@Override
+	public void afficherFinJeu(Joueur joueur) {
+		System.out.println("Fin de la partie!");
+		System.out.println("Le joueur "+joueur.getNom()+" remporte la victoire! Bravo!");
 	}
 
 }

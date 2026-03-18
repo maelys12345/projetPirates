@@ -11,18 +11,14 @@ public class CaseDuel extends CaseSpeciale {
 		if(valDe1>valDe2) {
 			j1.getPion().changerVie(1);
 			affichage.afficherGagnerUneVie(j1);
-			affichage.afficherViesRestantes(j1);
 			j2.getPion().changerVie(-1);
 			affichage.afficherPerdreUneVie(j2);
-			affichage.afficherViesRestantes(j2);
 		}
 		else if(valDe1<valDe2) {
 			j1.getPion().changerVie(-1);
 			affichage.afficherPerdreUneVie(j1);
-			affichage.afficherViesRestantes(j1);
 			j2.getPion().changerVie(1);
 			affichage.afficherGagnerUneVie(j2);
-			affichage.afficherViesRestantes(j2);
 		}
 		else {
 			affichage.afficherDuelEgalite();
