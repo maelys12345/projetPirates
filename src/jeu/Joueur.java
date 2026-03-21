@@ -1,11 +1,9 @@
 package jeu;
 
-import java.util.Scanner;
 
 public class Joueur {
 	private String nom;
 	private Pion pion;
-	private Scanner entreeClavier=new Scanner(System.in);
 	
 	public Joueur(String nom,Pion pion) {
 		this.nom=nom;
@@ -37,8 +35,8 @@ public class Joueur {
 		affichage.afficherAllerCase(this);
 	}
 	public void lancerDes(IAffichage affichage,PlateauJeu plateau) {
-		affichage.afficherLancerDes(this);
-		entreeClavier.next();
+		affichage.afficherLancerDes();
+		affichage.entrerNext();
 		plateau.getDe(0).lancer();
 		plateau.setResultatDes(0,plateau.getDe(0).getResultat());
 		plateau.getDe(1).lancer();
@@ -47,14 +45,12 @@ public class Joueur {
 	}
 	public void lancerUnDe(IAffichage affichage,PlateauJeu plateau) {
 		affichage.afficherLancerUnDe(this);
-		entreeClavier.next();
+		affichage.entrerNext();
 		plateau.getDe(0).lancer();
 		plateau.setResultatDes(0,plateau.getDe(0).getResultat());
 		plateau.setResultatDes(1,0);
 		affichage.afficherResultatUnDe(plateau);
 	}
-	public void fermerScanner() {
-		entreeClavier.close();
-	}
+
 
 }

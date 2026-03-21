@@ -1,7 +1,22 @@
 package jeu;
+import java.util.Scanner;
 
 public class Affichage implements IAffichage {
+	private Scanner entreeClavier=new Scanner(System.in);
 	
+
+	@Override
+	public String entrerString() {
+		return entreeClavier.nextLine();
+	}
+	@Override
+	public void entrerNext() {
+		entreeClavier.next();
+	}
+	@Override
+	public void entrerClose() {
+		entreeClavier.close();
+	}
 	@Override
 	public void afficherSeparation() {
 		System.out.println("\n------------------------------\n");
@@ -31,7 +46,7 @@ public class Affichage implements IAffichage {
 
 	@Override
 	public void afficherPirates(Pion[] pions) {
-		System.out.println("Quel pirate voulez-vous incarner?");
+		System.out.println("\nQuel pirate voulez-vous incarner?");
 		for(int i=0;i<pions.length;i++) {
 			if(pions[i].getJoueur()==null) {
 				System.out.println((i+1) + " : Le pirate "+pions[i].getPirate().getNom()+", de couleur "+pions[i].getPirate().getCouleur());
@@ -43,15 +58,17 @@ public class Affichage implements IAffichage {
 	public void afficherTourJoueur(Joueur joueur) {
 		System.out.println("Au tour du joueur "+joueur.getNom()+" de jouer!");
 		afficherViesRestantes(joueur);
+		afficherCaseActuelle(joueur);
+		System.out.println("");
 	}
 	
 	@Override
-	public void afficherLancerDes(Joueur joueur) {
+	public void afficherLancerDes() {
 		System.out.println("Appuyez sur une touche pour lancer les dés.");
 	}
 	@Override
 	public void afficherLancerUnDe(Joueur joueur) {
-		System.out.println("Joueur "+joueur.getNom()+", lance un dé!");
+		System.out.println("\nJoueur "+joueur.getNom()+", lancez un dé!");
 		System.out.println("Appuiez sur une touche pour lancer le dé.");
 	}
 	
@@ -59,12 +76,12 @@ public class Affichage implements IAffichage {
 	public void afficherResultatDes(PlateauJeu plateau) {
 		int total=plateau.getResultatDe(0)+plateau.getResultatDe(1);
 		System.out.println("Résultat des dés : [ "+plateau.getResultatDe(0)+" ]    [ "+plateau.getResultatDe(1)+" ]");
-		System.out.println("Total : "+total);
+		System.out.println("Total : "+total+"\n");
 	}
 	
 	@Override
 	public void afficherResultatUnDe(PlateauJeu plateau) {
-		System.out.println("Résultat du dé : [ "+plateau.getResultatDe(0)+" ]");
+		System.out.println("Résultat du dé : [ "+plateau.getResultatDe(0)+" ]\n");
 	}
 	
 	@Override
@@ -81,7 +98,14 @@ public class Affichage implements IAffichage {
 	@Override
 	public void decrireCaseTornade() {
 		System.out.println("Case tornade!");
-		System.out.println("Les deux pirates s'envolent et échangent leurs places.");
+		System.out.println("Les deux pirates s'envolent et échangent leurs places.\n");
+	}
+	@Override
+	public void decrireCaseVolcan(Joueur joueur) {
+		System.out.println("\nCase volcan!");
+		System.out.println("Un volcan entre en éruption!");
+		donnerPirate(joueur);
+		System.out.println(" prend peur et recule de 5 cases!\n");
 	}
 	@Override
 	public void afficherAvancerJusqua30(Joueur joueur) {
@@ -131,7 +155,7 @@ public class Affichage implements IAffichage {
 	}
 	@Override
 	public void afficherBombeDeclenchee() {
-		System.out.println("Argh! Une bombe cachée dans la case se déclenche!");
+		System.out.println("\nArgh! Une bombe cachée dans la case se déclenche!");
 	}
 	@Override
 	public void afficherPiratesExplosent() {

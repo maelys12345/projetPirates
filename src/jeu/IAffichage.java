@@ -1,19 +1,23 @@
 package jeu;
 
 public interface IAffichage {
+	public String entrerString();
+	public void entrerNext();
+	public void entrerClose();
 	public void afficherSeparation();
 	public void afficherMauvaisChoix();
 	public void afficherContexte(Joueur j1,Joueur j2);
 	public void demanderNom(int n);
 	public void afficherPirates(Pion[] pions);
 	public void afficherTourJoueur(Joueur joueur);
-	public void afficherLancerDes(Joueur joueur);
+	public void afficherLancerDes();
 	public void afficherLancerUnDe(Joueur joueur);
 	public void afficherResultatDes(PlateauJeu plateau);
 	public void afficherResultatUnDe(PlateauJeu plateau);
 	public void afficherCaseActuelle(Joueur joueur);
 	public void decrireCaseDuel();
 	public void decrireCaseTornade();
+	public void decrireCaseVolcan(Joueur joueur);
 	public void afficherAvancerJusqua30(Joueur joueur);
 	public void afficherReculerCase(Joueur joueur);
 	public void afficherAvancerCase(Joueur joueur);

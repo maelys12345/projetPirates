@@ -11,6 +11,24 @@ public class PlateauJeu {
 		De de2=new De();
 		des[0]=de1;
 		des[1]=de2;
+		CaseDuel duel1=new CaseDuel();
+		CaseDuel duel2=new CaseDuel();
+		CaseTornade tornade1=new CaseTornade();
+		CaseTornade tornade2=new CaseTornade();
+		CaseBombe bombe1=new CaseBombe(21);
+		CaseBombe bombe2=new CaseBombe(28);
+		CaseBombe bombe3=new CaseBombe(5);
+		CaseBombe bombe4=new CaseBombe(16);
+		CaseVolcan volcan=new CaseVolcan(14);
+		ajouterCaseSpeciale(duel1, 7);
+		ajouterCaseSpeciale(duel2, 19);
+		ajouterCaseSpeciale(tornade1,11);
+		ajouterCaseSpeciale(tornade2,26);
+		ajouterCaseSpeciale(bombe1, bombe1.getNumero());
+		ajouterCaseSpeciale(bombe2, bombe2.getNumero());
+		ajouterCaseSpeciale(bombe3, bombe3.getNumero());
+		ajouterCaseSpeciale(bombe4, bombe4.getNumero());
+		ajouterCaseSpeciale(volcan, volcan.getNumero());
 	}
 	public void ajouterCaseSpeciale(CaseSpeciale caseSpeciale, int indice) {
 		caseSpeciales[indice]=caseSpeciale;
