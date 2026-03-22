@@ -87,7 +87,6 @@ public class Jeu {
 		for(int i=0;i<2;i++) {
 			String nom=choisirNom(i+1);
 			Pion pirate=choisirPion(pions);
-			//affichage.entrerNext();
 			creerJoueur(nom,pirate);
 			affichage.afficherSeparation();
 		}
@@ -97,10 +96,9 @@ public class Jeu {
 		do {
 			Joueur joueurActuel=joueurs[indiceJoueurActuel];
 			affichage.afficherTourJoueur(joueurActuel);
-			int caseActuelle=donnerCaseActuelle(joueurActuel);
 			joueurActuel.lancerDes(affichage,plateau);
 			joueurActuel.deplacerPion(affichage,plateau.getResultatDe(0)+plateau.getResultatDe(1),plateau);
-			caseActuelle=donnerCaseActuelle(joueurActuel);
+			int caseActuelle=donnerCaseActuelle(joueurActuel);
 			if(plateau.getTabCaseSpe()[caseActuelle]!=null) {
 				plateau.getTabCaseSpe()[caseActuelle].appliquerEffet(affichage,joueurs[0],joueurs[1],plateau);
 				}
